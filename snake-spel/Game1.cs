@@ -12,6 +12,8 @@ namespace snake_spel
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
 
+        Player player;
+
         public Game1()
         {
             graphics = new GraphicsDeviceManager(this);
@@ -27,6 +29,8 @@ namespace snake_spel
         protected override void Initialize()
         {
             // TODO: Add your initialization logic here
+           
+
 
             base.Initialize();
         }
@@ -41,6 +45,7 @@ namespace snake_spel
             spriteBatch = new SpriteBatch(GraphicsDevice);
 
             // TODO: use this.Content to load your game content here
+            player = new Player(Content.Load<Texture2D>("snake"), 200, 200, 3.5f, 4.5f);
         }
 
         /// <summary>
@@ -63,7 +68,8 @@ namespace snake_spel
                 Exit();
 
             // TODO: Add your update logic here
-
+            player.Update(Window);
+            
             base.Update(gameTime);
         }
 
@@ -74,10 +80,12 @@ namespace snake_spel
         protected override void Draw(GameTime gameTime)
         {
             GraphicsDevice.Clear(Color.CornflowerBlue);
-
+            spriteBatch.Begin();
             // TODO: Add your drawing code here
-
+            player.Draw(spriteBatch);
+            spriteBatch.End();
             base.Draw(gameTime);
+            
         }
     }
 }
