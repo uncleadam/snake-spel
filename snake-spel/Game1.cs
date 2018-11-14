@@ -5,7 +5,8 @@ using Microsoft.Xna.Framework.Input;
 namespace snake_spel
 {
     /// <summary>
-    /// Ett program utvecklat av Ibbe och Adam 2018-19 i kursen programmering 2
+    /// Ett program utvecklat av Ibbe och Adam 2018-19 i kursen programmering 2.
+    /// Ibbes branch.
     /// </summary>
     public class Game1 : Game
     {
