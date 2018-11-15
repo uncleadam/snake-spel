@@ -45,7 +45,7 @@ namespace snake_spel
             spriteBatch = new SpriteBatch(GraphicsDevice);
 
             // TODO: use this.Content to load your game content here
-            player = new Player(Content.Load<Texture2D>("snake"), 200, 200, 3.5f, 4.5f);
+            player = new Player(Content.Load<Texture2D>("snake1"), 200, 200, 0f, 0f);
         }
 
         /// <summary>
