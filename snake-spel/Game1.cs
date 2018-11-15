@@ -5,7 +5,7 @@ using Microsoft.Xna.Framework.Input;
 namespace snake_spel
 {
     /// <summary>
-    /// This is the main type for your game.
+    /// Ett program utvecklat av Ibbe och Adam 2018-19 i kursen programmering 2
     /// </summary>
     public class Game1 : Game
     {
@@ -45,7 +45,11 @@ namespace snake_spel
             spriteBatch = new SpriteBatch(GraphicsDevice);
 
             // TODO: use this.Content to load your game content here
+<<<<<<< HEAD
             player = new Player(Content.Load<Texture2D>("snake1"), 200, 200, 0f, 0f);
+=======
+            player = new Player(Content.Load<Texture2D>("snake1"), 200, 200, 3.5f, 4.5f);
+>>>>>>> 04ab6ab6f8a56c15aa79f1c6c82f1e815dc2d77b
         }
 
         /// <summary>
