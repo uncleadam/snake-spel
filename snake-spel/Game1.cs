@@ -1,6 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using System;
 
 namespace snake_spel
 {
@@ -12,6 +13,7 @@ namespace snake_spel
     {
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
+       
 
         Player player;
 
@@ -83,6 +85,7 @@ namespace snake_spel
             GraphicsDevice.Clear(Color.CornflowerBlue);
             spriteBatch.Begin();
             // TODO: Add your drawing code here
+            //spriteBatch.Draw(gfx, position, Color.White);
             player.Draw(spriteBatch);
             spriteBatch.End();
             base.Draw(gameTime);
