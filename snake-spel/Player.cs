@@ -31,21 +31,26 @@ namespace snake_spel
             {
                 speed.X = 1;
                 speed.Y = 0;
+                angle = (float)Math.PI;
             }
             if (keyboardState.IsKeyDown(Keys.Left)) 
             {
                 speed.X = -1;
                 speed.Y = 0;
+                angle = 0;
             }
-            if(keyboardState.IsKeyDown(Keys.Up))
+            if (keyboardState.IsKeyDown(Keys.Up))
             {
                 speed.X = 0;
                 speed.Y = -1;
+                angle = (float)Math.PI / 2;
             }
             if (keyboardState.IsKeyDown(Keys.Down))
             {
                 speed.X = 0;
                 speed.Y = 1;
+                angle = (float)Math.PI * 3 / 2f;
+
             }
             vector += speed;
 
