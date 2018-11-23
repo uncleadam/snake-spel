@@ -12,6 +12,11 @@ namespace snake_spel
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
 
+        int levelNo;
+        bool victory;
+        Level level;
+
+
         Player player;
 
         public Game1()
@@ -29,10 +34,19 @@ namespace snake_spel
         protected override void Initialize()
         {
             // TODO: Add your initialization logic here
-           
 
+            WriteToFile();
 
             base.Initialize();
+        }
+
+        public void WriteToFile()
+        {
+            StreamWriter sw = new StreamWriter("----");
+            sw.WriteLine("1111111111111111111")
+            sw.WriteLine("0000000000000000001")
+
+            sw.Close();
         }
 
         /// <summary>
@@ -72,6 +86,14 @@ namespace snake_spel
                 Exit();
 
             // TODO: Add your update logic here
+            if (victory)
+            {
+                levelNo++;
+                level = new Level(Content, "1v1" + levelNo + ".txt");
+                victory = false;
+            }
+
+
             player.Update(Window);
             
             base.Update(gameTime);
@@ -88,8 +110,7 @@ namespace snake_spel
             // TODO: Add your drawing code here
             player.Draw(spriteBatch);
             spriteBatch.End();
-            base.Draw(gameTime);
-            
+            base.Draw(gameTime);            
         }
     }
 }
