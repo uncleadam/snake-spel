@@ -1,16 +1,19 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using System;
 
 namespace snake_spel
 {
     /// <summary>
-    /// Ett program utvecklat av Ibbe och Adam 2018-19 i kursen programmering 2
+    /// Ett program utvecklat av Ibbe och Adam 2018-19 i kursen programmering 2.
+    /// Ibbes branch.
     /// </summary>
     public class Game1 : Game
     {
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
+       
 
         int levelNo;
         bool victory;
@@ -104,6 +107,7 @@ namespace snake_spel
             GraphicsDevice.Clear(Color.CornflowerBlue);
             spriteBatch.Begin();
             // TODO: Add your drawing code here
+            //spriteBatch.Draw(gfx, position, Color.White);
             player.Draw(spriteBatch);
             spriteBatch.End();
             base.Draw(gameTime);            

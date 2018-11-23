@@ -28,7 +28,7 @@ namespace snake_spel
         {
             spriteBatch.Draw(texture, vector, Color.Green);
         }
-        
+
         public float X { get { return vector.X; } }
         public float Y { get { return vector.Y; } }
         public float Width { get { return texture.Width; } }

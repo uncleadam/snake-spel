@@ -11,8 +11,10 @@ namespace snake_spel
 {
     class Player : Movingobject
     {
+        
+        Vector2 vector;
+        float angle = 0;
 
-       
         //konstruktur för att skapa objektet 
 
         public Player(Texture2D texture, float X, float Y, float speedX, float speedY) : base(texture, X, Y, speedX, speedY) 
@@ -29,21 +31,26 @@ namespace snake_spel
             {
                 speed.X = 1;
                 speed.Y = 0;
+                angle = (float)Math.PI;
             }
             if (keyboardState.IsKeyDown(Keys.Left)) 
             {
                 speed.X = -1;
                 speed.Y = 0;
+                angle = 0;
             }
-            if(keyboardState.IsKeyDown(Keys.Up))
+            if (keyboardState.IsKeyDown(Keys.Up))
             {
                 speed.X = 0;
                 speed.Y = -1;
+                angle = (float)Math.PI / 2;
             }
             if (keyboardState.IsKeyDown(Keys.Down))
             {
                 speed.X = 0;
                 speed.Y = 1;
+                angle = (float)Math.PI * 3 / 2f;
+
             }
             vector += speed;
 
@@ -66,10 +73,18 @@ namespace snake_spel
                 vector.Y = 0;
             if (vector.Y > window.ClientBounds.Height - texture.Height)
                 vector.Y = window.ClientBounds.Height - texture.Height;
+            }
+
+        public void Draw(SpriteBatch spriteBatch)
+        {
+            spriteBatch.Draw(texture, vector, null, Color.White, angle + (float)Math.PI / 2,
+                new Vector2(texture.Width / 2, texture.Height / 2), 1.0f, SpriteEffects.None, 0);
 
         }
-       
-        
 
     }
+
+
+
 }
+
