@@ -11,7 +11,7 @@ namespace snake_spel
 {
     class Player : Movingobject
     {
-        
+        KeyboardState oldKs;
         Vector2 vector;
         float angle = 0;
 
@@ -27,28 +27,28 @@ namespace snake_spel
             KeyboardState keyboardState = Keyboard.GetState();
 
 
-            if (keyboardState.IsKeyDown(Keys.Right))
+            if (keyboardState.IsKeyDown(Keys.Right) && ! (speed.X < 0))
             {
-                speed.X = 1;
+                speed.X = 2;
                 speed.Y = 0;
                 angle = (float)Math.PI;
             }
-            if (keyboardState.IsKeyDown(Keys.Left)) 
+            if (keyboardState.IsKeyDown(Keys.Left) && ! (speed.X > 0)) 
             {
-                speed.X = -1;
+                speed.X = -2;
                 speed.Y = 0;
                 angle = 0;
             }
-            if (keyboardState.IsKeyDown(Keys.Up))
+            if (keyboardState.IsKeyDown(Keys.Up) && ! (speed.Y > 0))
             {
                 speed.X = 0;
-                speed.Y = -1;
+                speed.Y = -2;
                 angle = (float)Math.PI / 2;
             }
-            if (keyboardState.IsKeyDown(Keys.Down))
+            if (keyboardState.IsKeyDown(Keys.Down) && ! (speed.Y < 0))
             {
                 speed.X = 0;
-                speed.Y = 1;
+                speed.Y = 2;
                 angle = (float)Math.PI * 3 / 2f;
 
             }
@@ -73,7 +73,9 @@ namespace snake_spel
                 vector.Y = 0;
             if (vector.Y > window.ClientBounds.Height - texture.Height)
                 vector.Y = window.ClientBounds.Height - texture.Height;
-            }
+
+            oldKs = keyboardState;
+        }
 
         public void Draw(SpriteBatch spriteBatch)
         {
