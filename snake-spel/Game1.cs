@@ -2,6 +2,7 @@
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using System;
+using System.IO;
 
 namespace snake_spel
 {
@@ -38,18 +39,28 @@ namespace snake_spel
         {
             // TODO: Add your initialization logic here
 
-            WriteToFile();
+            //WriteToFile();
+            levelNo = 0;
+            victory = true;
 
             base.Initialize();
         }
 
         public void WriteToFile()
         {
-            StreamWriter sw = new StreamWriter("----");
-            sw.WriteLine("1111111111111111111")
-            sw.WriteLine("0000000000000000001")
+            
+            StreamWriter sw = new StreamWriter("lvl1.txt");
+            sw.WriteLine("010101");
+            sw.WriteLine("101010");
+            sw.WriteLine("010101");
+            sw.WriteLine("101010");
+            sw.WriteLine("010101");
+            sw.WriteLine("101010");
+            sw.WriteLine("010101");
+            sw.WriteLine("101010");
 
             sw.Close();
+            
         }
 
         /// <summary>
@@ -88,7 +99,7 @@ namespace snake_spel
             if (victory)
             {
                 levelNo++;
-                level = new Level(Content, "1v1" + levelNo + ".txt");
+                level = new Level(Content, "lvl" + levelNo + ".txt");
                 victory = false;
             }
 

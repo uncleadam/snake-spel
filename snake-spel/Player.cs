@@ -9,10 +9,10 @@ using System.Threading.Tasks;
 
 namespace snake_spel
 {
-    class Player : Movingobject
+    class Player : Movingobject, GameObject
     {
         
-        Vector2 vector;
+        //Vector2 vector;
         float angle = 0;
 
         //konstruktur för att skapa objektet 
@@ -75,7 +75,7 @@ namespace snake_spel
                 vector.Y = window.ClientBounds.Height - texture.Height;
             }
 
-        public void Draw(SpriteBatch spriteBatch)
+        public abstract void Draw(SpriteBatch spriteBatch)
         {
             spriteBatch.Draw(texture, vector, null, Color.White, angle + (float)Math.PI / 2,
                 new Vector2(texture.Width / 2, texture.Height / 2), 1.0f, SpriteEffects.None, 0);

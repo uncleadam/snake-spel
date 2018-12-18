@@ -24,7 +24,7 @@ namespace snake_spel
 
         //Ritar spelet eller draw bilden på skärmen.
 
-        public void Draw (SpriteBatch spriteBatch)
+        public override void Draw (SpriteBatch spriteBatch)
         {
             spriteBatch.Draw(texture, vector, Color.Green);
         }
