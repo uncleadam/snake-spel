@@ -2,6 +2,8 @@
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace snake_spel
 {
@@ -16,6 +18,12 @@ namespace snake_spel
        
 
         Player player;
+
+
+        //Apple 
+        Apple apple;
+        Texture2D AppleSprite;
+
 
         public Game1()
         {
@@ -32,8 +40,7 @@ namespace snake_spel
         protected override void Initialize()
         {
             // TODO: Add your initialization logic here
-           
-
+            
 
             base.Initialize();
         }
@@ -49,7 +56,12 @@ namespace snake_spel
 
             // TODO: use this.Content to load your game content here
             player = new Player(Content.Load<Texture2D>("snake1"), 200, 200, 0f, 0f);
+
+            AppleSprite = Content.Load<Texture2D>("RedApple");
+            apple = new Apple(AppleSprite, -100, -100);
+            AddApple();
         }
+        
 
         /// <summary>
         /// UnloadContent will be called once per game and is the place to unload
@@ -58,6 +70,18 @@ namespace snake_spel
         protected override void UnloadContent()
         {
             // TODO: Unload any non ContentManager content here
+        }
+
+
+        protected void AddApple()
+        {
+            Random random = new Random();
+
+            int rndX = random.Next(0, Window.ClientBounds.Width - AppleSprite.Width);
+            int rndY = random.Next(0, Window.ClientBounds.Height - AppleSprite.Height);
+
+            apple.Reposition(rndX, rndY);
+
         }
 
         /// <summary>
@@ -71,7 +95,35 @@ namespace snake_spel
                 Exit();
 
             // TODO: Add your update logic here
+
+            //Apple ska uppstå slumpmässigt
+           
+            
+
+            //foreach (Apple ap in appleApple.ToList())
+            //{
+            //    if (ap.IsAlive)
+            //    {
+            //        //ap.Update(gameTime);
+
+            //        if (ap.CheckCollision(player))
+            //        {
+            //            appleApple.Remove(ap);
+            //            player.Points++;
+            //        }
+            //    }
+            //    else
+            //        appleApple.Remove(ap);
+
+            //}
+
             player.Update(Window);
+            
+            if(player.CheckCollision(apple))
+            {
+                player.Points++;
+                AddApple();
+            }
             
             base.Update(gameTime);
         }
@@ -87,6 +139,11 @@ namespace snake_spel
             // TODO: Add your drawing code here
             //spriteBatch.Draw(gfx, position, Color.White);
             player.Draw(spriteBatch);
+            apple.Draw(spriteBatch);
+            //foreach (Apple ap in appleApple)
+            //    ap.Draw(spriteBatch);
+            
+
             spriteBatch.End();
             base.Draw(gameTime);
             

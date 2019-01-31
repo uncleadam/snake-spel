@@ -8,8 +8,25 @@ using System.Threading.Tasks;
 
 namespace snake_spel
 {
-    class Apple 
+    class Apple : GameObject
     {
+        
 
+        public Apple (Texture2D texture, float X, float Y)
+            : base(texture, X, Y)
+        {
+            
+        }
+
+        public void Update(GameTime gameTime)
+        {
+            
+        }
+
+        public void Reposition(float x, float y)
+        {
+            vector.X = x;
+            vector.Y = y;
+        }
     }
 }
