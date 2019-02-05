@@ -17,6 +17,7 @@ namespace snake_spel
         float angle = 0;
         int points;
 
+        //lista påatta ormens olika delar
         List<Body> bodyParts;
 
         Body head;

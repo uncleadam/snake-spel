@@ -26,7 +26,7 @@ namespace snake_spel
 
         public virtual void Draw(SpriteBatch spriteBatch)
         {
-            spriteBatch.Draw(texture, new Vector2(vector.X + texture.Width/2, vector.Y + texture.Height/2) , Color.White);
+            spriteBatch.Draw(texture, new Vector2(vector.X + texture.Width / 2, vector.Y + texture.Height / 2), Color.White);
         }
 
         public float X { get { return vector.X; } }
@@ -56,23 +56,18 @@ namespace snake_spel
             return myRect.Intersects(otherRect);
         }
     }
-    class Movingobject : GameObject 
+    class Movingobject : GameObject
     {
         protected Vector2 speed;
-
-      
-
 
 
         public Movingobject(Texture2D texture, float X, float Y, float speedX, float speedY) : base(texture, X, Y)
         {
             this.speed.X = speedX;
-            this.speed.Y = speedY;                    
+            this.speed.Y = speedY;
         }
 
     }
-
-
-
-
 }
+
+        

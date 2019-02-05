@@ -12,8 +12,7 @@ namespace snake_spel
     {
         
 
-        public Apple (Texture2D texture, float X, float Y)
-            : base(texture, X, Y)
+        public Apple (Texture2D texture, float X, float Y) : base(texture, X, Y)
         {
             
         }
