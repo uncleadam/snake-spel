@@ -19,7 +19,7 @@ namespace snake_spel
         {
             this.texture = image;
             this.vector.X = x;
-            this.vector.Y = y;
+            this.vector.Y = y;     
         }
 
         //Ritar spelet eller draw bilden på skärmen.

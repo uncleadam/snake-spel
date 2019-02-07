@@ -107,6 +107,11 @@ namespace snake_spel
            //Ritar ut rotationen 90 grader och hastighet
         public override void Draw(SpriteBatch spriteBatch)
         {
+            // huvudets rotation men den funkar inte helt 
+            spriteBatch.Draw(texture, vector, null, Color.White, angle + (float)Math.PI / 2,
+                new Vector2(texture.Width / 2, texture.Height / 2), 1.0f, SpriteEffects.None, 0);
+
+
             spriteBatch.Draw(texture, vector, Color.White);
 
             foreach (Body p in bodyParts)
