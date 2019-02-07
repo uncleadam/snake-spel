@@ -11,7 +11,7 @@ namespace snake_spel
     class Apple : GameObject
     {
         
-
+        //Apple texture och placering axeln X och Y
         public Apple (Texture2D texture, float X, float Y) : base(texture, X, Y)
         {
             

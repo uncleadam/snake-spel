@@ -9,113 +9,112 @@ using System.Threading.Tasks;
 
 namespace snake_spel
 {
-    class Player : Movingobject
+    class Player : GameObject
     {
 
         KeyboardState oldKs;
 
         float angle = 0;
         int points;
+        protected Vector2 speed;
 
-        //lista påatta ormens olika delar
+
+        //lista på ormens olika delar
         List<Body> bodyParts;
 
-        Body head;
-        Body bodyPart;
-        Vector2 newVector;
-
+        Vector2 speed = new Vector2(64, 0);
+        //Används för att sinka ned hastigheten till något lämpligt
+        int game_speed = 256; //Ändra detta värde när du äter ett äpple för att låta spelet gå fortare.
+        int move_time;
 
 
         //konstruktur för att skapa objektet 
-        public Player(Texture2D texture, float X, float Y, float speedX, float speedY) : base(texture, X, Y, speedX, speedY) 
+        public Player(Texture2D image, float x, float y, int length) : base(image, x, y)
         {
             bodyParts = new List<Body>();
 
             int antBodyParts = 5;
 
-            for (int i =0; i<antBodyParts-1; i++)
+            for (int i = 1; i <= length; i++)
             {
-                bodyPart = new Body(texture, X + ((i+1)*32), Y);
-                bodyParts.Add(bodyPart);
+                Body temp = new Body(image, X - i * 64, y);
+                bodyParts.Add(temp);
             }
         }
 
-        public void Update (GameWindow window)
+
+       
+       
+
+        //Styrningen, hastighet och riktning. 
+        public void Update (GameTime gameTime)
         {
             KeyboardState keyboardState = Keyboard.GetState();
 
 
-            if (keyboardState.IsKeyDown(Keys.Right) && ! (speed.X < 0))
+            if (keyboardState.IsKeyDown(Keys.Right))
             {
-                speed.X = 2;
+                speed.X = 64;
                 speed.Y = 0;
                 angle = (float)Math.PI;
 
             }
-            if (keyboardState.IsKeyDown(Keys.Left) && ! (speed.X > 0)) 
+            if (keyboardState.IsKeyDown(Keys.Left)) 
             {
-                speed.X = -2;
+                speed.X = -64;
                 speed.Y = 0;
                 angle = 0;
             }
-            if (keyboardState.IsKeyDown(Keys.Up) && ! (speed.Y > 0))
+            if (keyboardState.IsKeyDown(Keys.Up))
             {
                 speed.X = 0;
-                speed.Y = -2;
+                speed.Y = -64;
                 angle = (float)Math.PI / 2;
             }
-            if (keyboardState.IsKeyDown(Keys.Down) && ! (speed.Y < 0))
+            if (keyboardState.IsKeyDown(Keys.Down))
             {
                 speed.X = 0;
-                speed.Y = 2;
+                speed.Y = 64;
                 angle = (float)Math.PI * 3 / 2f;
 
             }
-
-            newVector = Position + speed;
-            Move(newVector);
-           
-            if (vector.X < 0)
-                vector.X = 0;
-            if (vector.X > window.ClientBounds.Width - texture.Width)
-                vector.X = window.ClientBounds.Width - texture.Width;
-
-            if (vector.Y < 0)
-                vector.Y = 0;
-            if (vector.Y > window.ClientBounds.Height - texture.Height)
-                vector.Y = window.ClientBounds.Height - texture.Height;
-
-            oldKs = keyboardState;
-
-        }
-
-        private void Move(Vector2 newVector )
-        {
-            Vector2 oldVector;
-
-            //Flytta huvudet
-            oldVector = vector;
-            vector = newVector;
-            newVector = oldVector;
-
-            //Flytta ormdelarna
-            for (int i=0;i<bodyParts.Count ; i++)
+            //Räknar ned tiden tills den ska flyttas
+            move_time -= gameTime.ElapsedGameTime.Milliseconds;
+            if (move_time <= 0)
             {
-                oldVector = bodyParts[i].Position;
-                bodyParts[i].Position= newVector;
-                newVector = oldVector;
+                //Gör först en imaginär flytt
+                Vector2 newPos = vector + speed;
+                //Spara den gamla positionen
+                Vector2 oldPos = vector;
+                //Flytta fram huvudet
+                vector = newPos;
+                //Använd den gamla positionen som ny position för nästa kroppsdel.
+                newPos = oldPos;
+
+                //Flyttar alla svansdelar
+                foreach (Body p in bodyParts)
+                {
+                    oldPos = new Vector2(p.X, p.Y);
+                    p.MoveTo(newPos);
+                    newPos = oldPos;
+                }
+                move_time = game_speed;
+
+                oldKs = keyboardState;
+
+
             }
-
-            
         }
-
+     
+           //Ritar ut rotationen 90 grader och hastighet
         public override void Draw(SpriteBatch spriteBatch)
         {
-            spriteBatch.Draw(texture, vector, null, Color.White, angle + (float)Math.PI / 2,
-                new Vector2(texture.Width / 2, texture.Height / 2), 1.0f, SpriteEffects.None, 0);
+            spriteBatch.Draw(image, vector Color.White);
 
-            foreach (Body b in bodyParts)
-                b.Draw(spriteBatch);
+            foreach (Body p in bodyParts)
+            {
+                p.Draw(spriteBatch);
+            }
         }
 
         public int Points { get { return points; } set { points = value; } }

@@ -9,7 +9,7 @@ namespace snake_spel
 {
     class Body : GameObject
     {
-
+        //textur och position
         public Body(Texture2D texture, float X, float Y) : base(texture, X, Y)
         {
            

@@ -20,7 +20,7 @@ namespace snake_spel
         Player player;
 
 
-        //Apple 
+        //Vår äpple
         Apple apple;
         Texture2D AppleSprite;
 
@@ -55,7 +55,7 @@ namespace snake_spel
             spriteBatch = new SpriteBatch(GraphicsDevice);
 
             // TODO: use this.Content to load your game content here
-            player = new Player(Content.Load<Texture2D>("snake1"), 200, 200, 0f, 0f);
+            player = new Player(Content.Load<Texture2D>("snake1"), 128, 128, 5);
 
             AppleSprite = Content.Load<Texture2D>("RedApple");
             apple = new Apple(AppleSprite, -100, -100);
@@ -72,7 +72,7 @@ namespace snake_spel
             // TODO: Unload any non ContentManager content here
         }
 
-
+        // Placering av äpplet
         protected void AddApple()
         {
             Random random = new Random();
@@ -95,10 +95,15 @@ namespace snake_spel
                 Exit();
 
             // TODO: Add your update logic here
+            player.Update( gameTime);
+
+            base.Update(gameTime);
+
+            // TODO: Add your update logic here
 
             //Apple ska uppstå slumpmässigt
-           
-            
+
+
 
             //foreach (Apple ap in appleApple.ToList())
             //{
@@ -117,8 +122,9 @@ namespace snake_spel
 
             //}
 
-            player.Update(Window);
+            player.Update(gameTime);
             
+            // poäng för varje gång ormen koliderar med äpplet 
             if(player.CheckCollision(apple))
             {
                 player.Points++;

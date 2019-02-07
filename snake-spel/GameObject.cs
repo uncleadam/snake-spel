@@ -15,18 +15,24 @@ namespace snake_spel
         protected bool isAlive = true;
         //Struktur för att skapa objekt
 
-        public GameObject(Texture2D texture, float X, float Y)
+        public GameObject(Texture2D image, float x, float y)
         {
-            this.texture = texture;
-            this.vector.X = X;
-            this.vector.Y = Y;
+            this.texture = image;
+            this.vector.X = x;
+            this.vector.Y = y;
         }
 
         //Ritar spelet eller draw bilden på skärmen.
 
         public virtual void Draw(SpriteBatch spriteBatch)
         {
-            spriteBatch.Draw(texture, new Vector2(vector.X + texture.Width / 2, vector.Y + texture.Height / 2), Color.White);
+            spriteBatch.Draw(texture, vector, Color.White);
+        }
+
+        public void MoveTo(Vector2 newPosition)
+        {
+            // Flyttar objektet till en ny position.
+            this.vector = newPosition;
         }
 
         public float X { get { return vector.X; } }
@@ -47,8 +53,8 @@ namespace snake_spel
 
         }
 
-        //sida 81
-        public bool CheckCollision(GameObject other) //Movingobject?
+        //Koliderar med äpplet 
+        public bool CheckCollision(GameObject other) 
         {
             Rectangle myRect = new Rectangle(Convert.ToInt32(X), Convert.ToInt32(Y), Convert.ToInt32(Width), Convert.ToInt32(Height));
 
@@ -56,18 +62,7 @@ namespace snake_spel
             return myRect.Intersects(otherRect);
         }
     }
-    class Movingobject : GameObject
-    {
-        protected Vector2 speed;
 
-
-        public Movingobject(Texture2D texture, float X, float Y, float speedX, float speedY) : base(texture, X, Y)
-        {
-            this.speed.X = speedX;
-            this.speed.Y = speedY;
-        }
-
-    }
 }
 
         
