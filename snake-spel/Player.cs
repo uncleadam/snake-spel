@@ -16,8 +16,6 @@ namespace snake_spel
 
         float angle = 0;
         int points;
-        protected Vector2 speed;
-
 
         //lista på ormens olika delar
         List<Body> bodyParts;
@@ -109,7 +107,7 @@ namespace snake_spel
            //Ritar ut rotationen 90 grader och hastighet
         public override void Draw(SpriteBatch spriteBatch)
         {
-            spriteBatch.Draw(image, vector Color.White);
+            spriteBatch.Draw(texture, vector, Color.White);
 
             foreach (Body p in bodyParts)
             {
