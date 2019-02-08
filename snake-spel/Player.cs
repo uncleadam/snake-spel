@@ -20,7 +20,7 @@ namespace snake_spel
         //lista på ormens olika delar
         List<Body> bodyParts;
 
-        Vector2 speed = new Vector2(64, 0);
+        Vector2 speed = new Vector2(32, 0);
         //Används för att sinka ned hastigheten till något lämpligt
         int game_speed = 256; //Ändra detta värde när du äter ett äpple för att låta spelet gå fortare.
         int move_time;
@@ -35,7 +35,7 @@ namespace snake_spel
 
             for (int i = 1; i <= length; i++)
             {
-                Body temp = new Body(image, X - i * 64, y);
+                Body temp = new Body(image, X - i * 32, y);
                 bodyParts.Add(temp);
             }
         }
@@ -52,27 +52,27 @@ namespace snake_spel
 
             if (keyboardState.IsKeyDown(Keys.Right))
             {
-                speed.X = 64;
+                speed.X = 32;
                 speed.Y = 0;
                 angle = (float)Math.PI;
 
             }
             if (keyboardState.IsKeyDown(Keys.Left)) 
             {
-                speed.X = -64;
+                speed.X = -32;
                 speed.Y = 0;
                 angle = 0;
             }
             if (keyboardState.IsKeyDown(Keys.Up))
             {
                 speed.X = 0;
-                speed.Y = -64;
+                speed.Y = -32;
                 angle = (float)Math.PI / 2;
             }
             if (keyboardState.IsKeyDown(Keys.Down))
             {
                 speed.X = 0;
-                speed.Y = 64;
+                speed.Y = 32;
                 angle = (float)Math.PI * 3 / 2f;
 
             }
@@ -108,11 +108,8 @@ namespace snake_spel
         public override void Draw(SpriteBatch spriteBatch)
         {
             // huvudets rotation men den funkar inte helt 
-            spriteBatch.Draw(texture, vector, null, Color.White, angle + (float)Math.PI / 2,
+            spriteBatch.Draw(texture, vector+new Vector2(16,16), null, Color.White, angle + (float)Math.PI / 2,
                 new Vector2(texture.Width / 2, texture.Height / 2), 1.0f, SpriteEffects.None, 0);
-
-
-            spriteBatch.Draw(texture, vector, Color.White);
 
             foreach (Body p in bodyParts)
             {

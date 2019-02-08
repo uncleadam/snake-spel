@@ -53,8 +53,10 @@ namespace snake_spel
         {
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
-
+            
             // TODO: use this.Content to load your game content here
+
+            
             player = new Player(Content.Load<Texture2D>("snake1"), 128, 128, 5);
 
             AppleSprite = Content.Load<Texture2D>("RedApple");
